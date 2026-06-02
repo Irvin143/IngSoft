@@ -14,19 +14,56 @@ public class Usuario {
     }
 
     private boolean iniciarSesion(String correo, String contraseña) {
-        // Lógica para verificar el correo y la contraseña
         return this.correo.equals(correo) && this.contraseña.equals(contraseña);
     }
 
-    private boolean cerrarSesion() {
-        // Lógica para cerrar sesión
+    private boolean cerrarSesion() {        
         return true; // Simulación de cierre de sesión exitoso
     }
 
     private boolean cambiarContraseña(String nuevaContraseña) {
-        // Lógica para cambiar la contraseña
+        if (nuevaContraseña == null || nuevaContraseña.length() < 6) {
+            System.out.println("Error: la contraseña debe tener al menos 6 caracteres.");
+            return false;
+        }
+        if (nuevaContraseña.equals(this.contraseña)) {
+            System.out.println("Error: la nueva contraseña no puede ser igual a la actual.");
+            return false;
+        }
         this.contraseña = nuevaContraseña;
         return true; // Simulación de cambio de contraseña exitoso
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
 }

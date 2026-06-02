@@ -1,35 +1,82 @@
 package modules.cargaAcademica;
 
+import java.util.List;
+import back.Materia;
+
 public class CargaAcademica {
     private String fecha;
     private int totalCreditos;
+    private String estado; // "Pendiente", "Confirmada", "Rechazada"    
+
+    private List<Materia> materias;
     
-    public CargaAcademica(String fecha, int totalCreditos) {
+    public CargaAcademica(String fecha, int totalCreditos, String estado) {
         this.fecha = fecha;
         this.totalCreditos = totalCreditos;
+        this.estado = estado;
     }
 
-    private void agregarMateria(String materia) {
-        // Lógica para agregar una materia a la carga académica
-        System.out.println("Agregando materia: " + materia);
+    private void agregarMateria(Materia materia) {
+        materias.add(materia);
+        totalCreditos += materia.getCreditos();
+        System.out.println("Materia " + materia.getNombre() + " agregada a la carga académica.");
     }
 
-    private void eliminarMateria(String materia) {
-        // Lógica para eliminar una materia de la carga académica
-        System.out.println("Eliminando materia: " + materia);
+    private void eliminarMateria(Materia materia) {
+        materias.remove(materia);
+        totalCreditos -= materia.getCreditos();
+        System.out.println("Materia " + materia.getNombre() + " eliminada de la carga académica.");
     }
 
-    private void validarCreditos() {
-        // Lógica para validar que el total de créditos no exceda el límite permitido
+    private boolean validarCreditos() {
         if (totalCreditos > 30) {
-            System.out.println("Error: El total de créditos excede el límite permitido.");
+            return false;
         } else {
-            System.out.println("Total de créditos válidos.");
+            return true;
         }
     }
 
-    private void confirmarCarga() {
-        // Lógica para confirmar la carga académica
-        System.out.println("Carga académica confirmada para la fecha: " + fecha);
+    private boolean confirmarCarga() {
+        if (validarCreditos()) {
+            estado = "Confirmada";
+        } else {
+            estado = "Rechazada";
+            return false;
+        }
+        if(materias == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getTotalCreditos() {
+        return totalCreditos;
+    }
+
+    public void setTotalCreditos(int totalCreditos) {
+        this.totalCreditos = totalCreditos;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public List<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(List<Materia> materias) {
+        this.materias = materias;
     }
 }
